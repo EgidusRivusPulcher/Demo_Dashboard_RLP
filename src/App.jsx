@@ -99,10 +99,11 @@ function App(){
     // Logo in PDF
     if(brand.logo){
       try{
-        if(brand.logo.startsWith("data:image/")){
-          const m=brand.logo.match(/^data:image\\/(png|jpeg|jpg)/);
-          const fmt=m?(m[1]==="jpg"?"JPEG":m[1].toUpperCase()):"PNG";
-          doc.addImage(brand.logo, fmt, pageWidth-124, 16, 110, 36);
+        if (brand.logo.startsWith("data:image/")) {
+          let fmt = "PNG";
+          if (brand.logo.startsWith("data:image/jpeg") || brand.logo.startsWith("data:image/jpg")) fmt = "JPEG";
+          else if (brand.logo.startsWith("data:image/png")) fmt = "PNG";
+          doc.addImage(brand.logo, fmt, pageWidth - 124, 16, 110, 36);
         }
       }catch(e){}
     }
